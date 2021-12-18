@@ -1,0 +1,80 @@
+{% extends "layouts/administrator.html" %}
+{% load static %}
+
+{% block dashboard %}
+active-sub
+{% endblock %}
+
+{% block title %}
+Dashboard | Sistem Kendali Motor DC
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    <div id="page-head">
+
+<div class="pad-all text-center">
+  <style type="text/css">
+  #img-weli {
+    text-align: center;
+  }
+
+  .img-weli {
+    width: 80px;
+    border-radius:10px;
+  }
+</style>
+      <div id="img-weli"><img src="/assets/img/weli.png" alt="" title="" name="slide" class="img-weli"></div>
+<h3>Hibridisasi Evolution Strategy Dengan Particle Swarm Optimization Sebagai Metode Tuning Parameter Kendali PID Pada Pengendalian Kecepatan Motor DC</h3>
+
+</div>
+        </div>
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+
+      <div id="page-content">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-information"></i>
+                    <b>Sistem</b></h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  Sistem kendali kecepatan motor DC menggunakan metode <em>tuning metaheuristic</em> sehingga diperoleh diagram respon keluaran dan parameter kendali PID yang optimal.
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-gear"></i>
+                    <b>Metode</b></h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  Metode <em>tuning metaheuristic</em> yang digunakan adalah hibridisasi Evolution Strategy dengan Particle Swarm Optimization untuk mencari Parameter Kendali PID pada Pengendalian Kecepatan Motor DC.
+                </div>
+                  </div>
+                  <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-home"></i>
+                    <b>Menu</b></h4><br>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  <b>Menu dashboard</b> merupakan halaman awal sistem yang menampilkan judul penelitian dan penjelasan dari sistem. <br><br>
+                  <b>Menu Inisialisasi Parameter</b> merupakan halaman untuk input parameter Motor DC. <br><br>
+                  <b>Menu PID</b> merupakan halaman untuk input parameter pada metode PID dan menampilkan hasil diagram respon keluaran. <br><br>
+                  <b>Menu PID dengan ES</b> merupakan halaman untuk input parameter pada metode PID-Evolution Strategy dan menampilkan hasil diagram respon keluaran dengan nilai Kp, Ki, Kd terbaik. <br><br>
+                  <b>Menu PID dengan PSO</b> merupakan halaman untuk input parameter pada metode PID-Particle Swarm Optimization dan menampilkan hasil diagram respon keluaran dengan nilai Kp, Ki, Kd terbaik. <br><br>
+                  <b>Menu PID dengan ES+PSO</b> merupakan halaman untuk input parameter pada metode PID-Evolution Strategy dengan Particle Swarm Optimization dan menampilkan hasil diagram respon keluaran. <br><br>
+                  <b>Rangkuman</b> merupakan halaman untuk menampilkan rangkuman semua hasil diagram respon keluaran semua metode. <br><br>
+                  <b>Profil</b> merupakan halaman untuk menampilkan profil penulis.
+                </div>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+    <!--===================================================-->
+    <!--End page content-->
+
+</div>
+{% endblock %}

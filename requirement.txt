@@ -1,0 +1,8 @@
+django
+django-storages
+sklearn
+sklearn-genetic
+plotly
+pandas
+django_globals
+hyperactive

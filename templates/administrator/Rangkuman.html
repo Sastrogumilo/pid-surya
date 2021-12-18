@@ -1,0 +1,351 @@
+{% extends "layouts/administrator.html" %}
+{% load static %}
+
+{% block Rangkuman %}
+active-sub
+{% endblock %}
+
+{% block title %}
+Rangkuman| Sistem Kendali Motor DC
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+  <div id="page-head">
+
+    <div class="pad-all text-center">
+    <h3>Rangkuman</h3>
+    <p>Sistem Optimasi Kendali Kecepatan Motor DC</p>
+    </div>
+            </div>
+
+
+  <!--Page content-->
+  <!--===================================================-->
+  
+<div id="page-content">
+  <div class="col-lg-11">
+      <div class="panel">
+
+        <div class="panel-body">
+          <div class="panel-heading">
+              <h3 class="panel-title">Hasil Penghitungan</h3>
+          </div>
+          
+          {% autoescape off %}
+          {{figReport}}
+          {% endautoescape %}
+        
+        </div> 
+        <div class="panel-heading">
+          <h3 class="panel-title">Tabel Hasil</h3>
+        </div>
+
+        <div class="panel-body">
+          <table id="demo-dt-basic" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                  <tr>
+                    <th>Metode</th>
+                      <th>Integral Error</th>
+                      <th>Controller Reversal Amplitudo</th>
+                      <th>Controller Reversal Count</th>
+                      <th>Overshoot</th>
+                      <th>Rise Time (0.01s)</th>
+                      <th>Settling Time (0.01s)</th>
+                      
+                  </tr>
+              </thead>
+
+              {% if render_view == False %}
+              <tbody>
+                  <tr>
+                      <td>{{Metode1}}</td>
+                      <td>{{Error}}</td>
+                      <td>{{Max_PID}}</td>
+                      <td>{{PID_Count}}</td>
+                  </tr>
+              </tbody>
+
+              {% else %}
+
+              <tbody>
+                <tr>
+                    
+                    <td>{{Metode1}}</td>
+                    <td>{{Error}}</td>
+                    <td>{{Max_PID}}</td>
+                    <td>{{PID_Count}}</td>
+                    <td>{{info_pid.0}}%</td>
+                    <td>{{info_pid.1}}</td>
+                    <td>{{info_pid.2}}</td>
+                   
+                </tr>
+              
+                <tr>
+                    
+                    <td>{{Metode2}}</td>
+                    <td>{{Error_evo}}</td>
+                    <td>{{Max_PID_evo}}</td>
+                    <td>{{PID_Count_evo}}</td>
+                    <td>{{info_evo.0}}%</td>
+                    <td>{{info_evo.1}}</td>
+                    <td>{{info_evo.2}}</td>
+                    
+                </tr>
+            
+                <tr>
+                  
+                  <td>{{Metode3}}</td>
+                  <td>{{Error_pso}}</td>
+                  <td>{{Max_PID_pso}}</td>
+                  <td>{{PID_Count_pso}}</td>
+                  <td>{{info_pso.0}}%</td>
+                  <td>{{info_pso.1}}</td>
+                  <td>{{info_pso.2}}</td>
+                 
+                </tr>
+
+                <tr>
+                    
+                    <td>{{Metode4}}</td>
+                    <td>{{Error_evo_pso}}</td>
+                    <td>{{Max_PID_evo_pso}}</td>
+                    <td>{{PID_Count_evo_pso}}</td>
+                    <td>{{info_evo_pso.0}}%</td>
+                    <td>{{info_evo_pso.1}}</td>
+                    <td>{{info_evo_pso.2}}</td>
+                    
+                </tr>
+        </tbody>
+
+        {% endif %}
+      
+          </table>
+          </div>
+        </div>
+        
+      </div>
+      {% if messages %}
+        {% for message in messages %}
+        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+          <div class="toast" style="position: absolute; top: 0; right: 0;">
+            <div class="toast-header">
+              <img src="..." class="rounded mr-2" alt="...">
+              <strong class="mr-auto">ERROR !!!!</strong>
+             
+              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body">
+              {{message}}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+  </div>
+    <!--===================================================-->
+    <!--End page content-->
+
+
+
+{% endblock %}
+
+
+{% block js %}
+
+ <!--DataTables [ OPTIONAL ]-->
+ <script src="{% static 'plugins/datatables/media/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/media/js/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js' %}"></script>
+
+
+ <!--DataTables Sample [ SAMPLE ]-->
+<script type="text/javascript">
+
+  // Tables-DataTables.js
+  // ====================================================================
+  // This file should not be included in your project.
+  // This is just a sample how to initialize plugins or components.
+  //
+  // - ThemeOn.net -
+
+
+
+  $(document).on('nifty.ready', function() {
+
+
+      // DATA TABLES
+      // =================================================================
+      // Require Data Tables
+      // -----------------------------------------------------------------
+      // http://www.datatables.net/
+      // =================================================================
+
+      $.fn.DataTable.ext.pager.numbers_length = 5;
+
+
+      // Basic Data Tables with responsive plugin
+      // -----------------------------------------------------------------
+      $('#demo-dt-basic').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic2').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic3').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic4').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+      $('#demo-dt-basic5').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic6').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+
+
+
+      // Row selection (single row)
+      // -----------------------------------------------------------------
+      var rowSelection = $('#demo-dt-selection').DataTable({
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      });
+
+      $('#demo-dt-selection').on( 'click', 'tr', function () {
+          if ( $(this).hasClass('selected') ) {
+              $(this).removeClass('selected');
+          }
+          else {
+              rowSelection.$('tr.selected').removeClass('selected');
+              $(this).addClass('selected');
+          }
+      } );
+
+
+
+
+
+
+      // Row selection and deletion (multiple rows)
+      // -----------------------------------------------------------------
+      var rowDeletion = $('#demo-dt-delete').DataTable({
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          },
+          "dom": '<"toolbar">frtip'
+      });
+      $('#demo-custom-toolbar').appendTo($("div.toolbar"));
+
+      $('#demo-dt-delete tbody').on( 'click', 'tr', function () {
+          $(this).toggleClass('selected');
+      } );
+
+      $('#demo-dt-delete-btn').click( function () {
+          rowDeletion.rows('.selected').remove().draw( false );
+      } );
+
+
+
+
+
+
+      // Add Row
+      // -----------------------------------------------------------------
+      var t = $('#demo-dt-addrow').DataTable({
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          },
+          "dom": '<"newtoolbar">frtip'
+      });
+      $('#demo-custom-toolbar2').appendTo($("div.newtoolbar"));
+
+      var randomInt = function(min,max){
+          return Math.floor(Math.random()*(max-min+1)+min);
+      }
+      $('#demo-dt-addrow-btn').on( 'click', function () {
+          t.row.add( [
+              'Adam Doe',
+              'New Row',
+              'New Row',
+              randomInt(1,100),
+              '2015/10/15',
+              '$' + randomInt(1,100) +',000'
+          ] ).draw();
+      } );
+
+
+  });
+
+</script>
+ <!--Bootbox Modals [ OPTIONAL ]-->
+<script src="{% static 'plugins/bootbox/bootbox.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static "plugins/dropify/js/dropify.js" %}"></script>
+
+{% endblock %}
